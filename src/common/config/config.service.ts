@@ -10,6 +10,10 @@ export class ConfigService extends NestJsConfigService<ValidatedEnvs> {
     super();
   }
 
+  public getDBConnectionString(): string {
+    return `postgres://${this.get('DATABASE_USERNAME')}:${this.get('DATABASE_PASSWORD')}@${this.get('DATABASE_HOST')}:${this.get('DATABASE_PORT')}/${this.get('DATABASE_NAME')}`;
+  }
+
   get IS_PRODUCTION(): boolean {
     return this.get('NODE_ENV', { infer: true }) === 'production';
   }
