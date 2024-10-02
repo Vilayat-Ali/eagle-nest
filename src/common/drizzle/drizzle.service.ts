@@ -1,29 +1,34 @@
+// lib
 import { Injectable } from '@nestjs/common';
 import postgres from 'postgres';
-import { drizzle, PostgresJsDatabase } from 'drizzle-orm/postgres-js';
-import { ConfigService } from '../config/config.service';
+import { drizzle } from 'drizzle-orm/postgres-js';
 import { migrate } from 'drizzle-orm/postgres-js/migrator';
+
+// services
+import { ConfigService } from '../config/config.service';
 
 // schema
 import * as schema from './schema';
 
 @Injectable()
 export class DrizzleService {
-  private dbClient: PostgresJsDatabase<any> | undefined;
+  private db = globalThis as unknown as {
+    conn: postgres.Sql | undefined;
+  };
 
   constructor(private readonly configService: ConfigService) {
-    if (!this.dbClient) {
-      const conn = postgres(this.configService.getDBConnectionString());
-      this.dbClient = drizzle(conn, { schema });
+    if (!this.db.conn) {
+      this.db.conn = postgres(this.configService.getDBConnectionString());
     }
   }
 
-  public runMigration() {
+  public async runMigration() {
     try {
       const conn = postgres(this.configService.getDBConnectionString(), {
         max: 1,
       });
-      migrate(drizzle(conn, { schema }), {
+
+      await migrate(drizzle(conn, { schema }), {
         migrationsSchema: './schema',
         migrationsFolder: 'migrations',
       });
@@ -34,6 +39,6 @@ export class DrizzleService {
   }
 
   public getDBClient() {
-    return this.dbClient;
+    return drizzle(this.db.conn, { schema });
   }
 }
