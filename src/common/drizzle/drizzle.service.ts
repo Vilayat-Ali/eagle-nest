@@ -1,6 +1,6 @@
 // lib
 import { Injectable } from '@nestjs/common';
-import postgres from 'postgres';
+import * as postgres from 'postgres';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import { migrate } from 'drizzle-orm/postgres-js/migrator';
 
@@ -9,6 +9,7 @@ import { ConfigService } from '../config/config.service';
 
 // schema
 import * as schema from './schema';
+
 
 @Injectable()
 export class DrizzleService {

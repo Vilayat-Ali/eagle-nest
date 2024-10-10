@@ -17,8 +17,8 @@ async function bootstrap() {
   );
 
   // adding middlewares
-  await app.register(fastifyCompress, { global: true }); // compression
-  await app.register(fastifyHelmet, { global: true }); // security
+  // await app.register(fastifyCompress, { global: true }); // compression
+  // await app.register(fastifyHelmet, { global: true }); // security
 
   await app.listen(process.env.PORT);
 }
