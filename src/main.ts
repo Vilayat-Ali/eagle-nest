@@ -4,11 +4,14 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+import compression from '@fastify/compress';
 import fastifyHelmet from '@fastify/helmet';
-import fastifyCompress from '@fastify/compress';
 
 // app module
 import { AppModule } from './app/app.module';
+
+// build utils
+import setupSwagger from "./swagger";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -16,11 +19,14 @@ async function bootstrap() {
     new FastifyAdapter(),
   );
 
-  // adding middlewares
-  // await app.register(fastifyCompress, { global: true }); // compression
-  // await app.register(fastifyHelmet, { global: true }); // security
+  // setting up swagger docs
+  setupSwagger(app);
 
-  await app.listen(process.env.PORT);
+  // middleware
+  await app.register(compression, { global: true });
+  await app.register(fastifyHelmet, { global: true });
+
+  await app.listen({port: Number(process.env.PORT)});
 }
 
 bootstrap();
