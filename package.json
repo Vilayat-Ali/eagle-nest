@@ -2,7 +2,11 @@
   "name": "eagle-nest",
   "version": "0.0.1",
   "description": "",
-  "author": "Syed Vilayat Ali Rizvi <vilayatcodemysite@gmail.com>",
+  "author": {
+    "name": "Syed Vilayat Ali Rizvi",
+    "email": "vilayatcodemysite@gmail.com",
+    "url": "https://mystic-rustacean.vercel.app"
+  },
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
