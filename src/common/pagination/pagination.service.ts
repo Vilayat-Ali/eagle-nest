@@ -1,6 +1,6 @@
 // lib
 import { z } from "zod";
-import { HttpStatus, Injectable } from "@nestjs/common";
+import { HttpStatus, Injectable, Global } from "@nestjs/common";
 import { PgViewBase } from "drizzle-orm/pg-core/view-base";
 import { SQL, Subquery, ColumnsSelection, sql } from "drizzle-orm";
 import { PgTable, TableConfig } from "drizzle-orm/pg-core";
@@ -14,8 +14,9 @@ import { paginationSchema, type PaginationType, type PaginationSearchType, type 
 // utils
 import generateWhereClause from "./utils/generate-where-clause";
 
+@Global()
 @Injectable()
-export class Pagination {
+export class PaginationService {
     constructor(private readonly drizzleService: DrizzleService) { }
 
     async handlePagination<T extends SQL<unknown> | PgTable<TableConfig> | Subquery<string, Record<string, unknown>> | PgViewBase<string, boolean, ColumnsSelection>>(drizzleModel: T, paginationOptions: PaginationType) {
