@@ -19,7 +19,8 @@ export class DrizzleModule implements OnApplicationBootstrap {
     try {
       await this.drizzleService.runMigration();
       console.log(`Migrations ran successfully...`);
-    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_error) {
       process.exit(1);
     }
   }

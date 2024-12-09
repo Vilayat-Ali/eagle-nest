@@ -11,7 +11,7 @@ import fastifyHelmet from '@fastify/helmet';
 import { AppModule } from './app/app.module';
 
 // build utils
-import setupSwagger from "./swagger";
+import setupSwagger from './swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -26,7 +26,7 @@ async function bootstrap() {
   await app.register(compression, { global: true });
   await app.register(fastifyHelmet, { global: true });
 
-  await app.listen({port: Number(process.env.PORT)});
+  await app.listen({ port: Number(process.env.PORT) });
 }
 
 bootstrap();

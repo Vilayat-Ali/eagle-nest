@@ -10,7 +10,7 @@ import { DrizzleModule } from '../drizzle/drizzle.module';
 import { DrizzleService } from '../drizzle/drizzle.service';
 
 @Module({
-    imports: [ConfigModule, CompressionModule, DrizzleModule],
-    providers: [DrizzleService]
+  imports: [ConfigModule, CompressionModule, DrizzleModule],
+  providers: [DrizzleService],
 })
 export class PaginationModule {}

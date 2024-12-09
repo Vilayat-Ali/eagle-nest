@@ -10,6 +10,6 @@ import { ControllersController } from './controllers/controllers.controller';
 
 @Module({
   imports: [ConfigModule, CompressionModule],
-  controllers: [ControllersController]
+  controllers: [ControllersController],
 })
 export class EncryptionKeyModule {}

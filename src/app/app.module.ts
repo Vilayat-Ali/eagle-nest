@@ -8,7 +8,12 @@ import { CompressionModule } from 'src/common/compression/compression.module';
 import { EncryptionKeyModule } from 'src/common/encryption_key/encryption-key.module';
 
 @Module({
-  imports: [ConfigModule, DrizzleModule, CompressionModule, EncryptionKeyModule],
+  imports: [
+    ConfigModule,
+    DrizzleModule,
+    CompressionModule,
+    EncryptionKeyModule,
+  ],
   controllers: [],
   providers: [],
 })

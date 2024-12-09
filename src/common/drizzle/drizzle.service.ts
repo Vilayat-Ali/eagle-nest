@@ -10,7 +10,6 @@ import { ConfigService } from '../config/config.service';
 // schema
 import * as schema from './schema';
 
-
 @Injectable()
 export class DrizzleService {
   private db = globalThis as unknown as {
